@@ -108,8 +108,8 @@ body {
 
 .prevTrack {
   position: absolute;
-  left: 70px;
-  bottom: 20px;
+  left: 75px;
+  bottom: 35px;
   cursor: pointer;
   transform: rotate(-3deg);
   text-align: center;
@@ -117,8 +117,8 @@ body {
 
 .nextTrack {
   position: absolute;
-  right: 70px;
-  bottom: 20px;
+  right: 75px;
+  bottom: 35px;
   cursor: pointer;
   transform: rotate(3deg);
   text-align: center;
