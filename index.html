@@ -47,7 +47,8 @@
         });
 
         window.onSpotifyWebPlaybackSDKReady = () => {
-            const token = 'BQAlnmISCey0jEjFRpvm6riUpRnidho2ByvNBjiZ1qoV1-UMf_he0OxlMJdNtfyqTX-kEMhMMveHF66Aemh3ZIHYUaWnFMh4lhuWEEyjeR_VXmMmT9RwHeZxZvBDVNoKc9H6050LC78Q0lEncZGc4VVvyzzHfaAonzZ0OW5in5njFgeIhnH5OvtI0YnlWauXabb7WbCw';
+            const token = localStorage.getItem('spotifyAccessToken');
+            localStorage.removeItem('spotifyAccessToken');
             const player = new Spotify.Player({
                 name: 'Record Player',
                 getOAuthToken: cb => { cb(token); },
