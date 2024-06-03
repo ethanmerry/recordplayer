@@ -62,7 +62,7 @@
             });
 
             player.addListener('authentication_error', ({ message }) => {
-                console.error(message);
+                console.log(message);
                 const clientId = 'd9a832c56d71428da01eb36c8b6e588e';
                 const redirectUri = 'https://recordplayer.vercel.app/callback.html';
                 const scopes = 'streaming';
