@@ -9,7 +9,6 @@
 </head>
 <body>
   <div class="currentSong">
-    <button id="login-button" class="button">Log in with Spotify</button>
     <div class="track">Track Name</div>
     <div class="artist">Artist</div>
     <button id="togglePlay" class="button">Play</button>
@@ -47,6 +46,12 @@
         });
 
         window.onSpotifyWebPlaybackSDKReady = () => {
+            const clientId = 'd9a832c56d71428da01eb36c8b6e588e';
+            const redirectUri = 'https://recordplayer.vercel.app/callback.html';
+            const scopes = 'streaming';
+
+            const url = `https://accounts.spotify.com/authorize?response_type=token&client_id=${clientId}&scope=${scopes}&redirect_uri=${redirectUri}`;
+            window.location = url;
             const token = localStorage.getItem('spotifyAccessToken');
             localStorage.removeItem('spotifyAccessToken');
             const player = new Spotify.Player({
