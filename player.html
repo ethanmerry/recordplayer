@@ -38,6 +38,9 @@
     <script>
         window.onSpotifyWebPlaybackSDKReady = () => {
             const token = localStorage.getItem('spotifyAccessToken');
+            if (!token) {
+              window.location = "https://recordplayer.vercel.app";
+            }
             const player = new Spotify.Player({
                 name: 'Record Player',
                 getOAuthToken: cb => { cb(token); },
