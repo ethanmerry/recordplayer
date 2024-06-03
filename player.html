@@ -266,17 +266,24 @@
                 
                 function getLuminance(color) {
                     const luminance = 0.2126 * color[0] + 0.7152 * color[1] + 0.0722 * color[2];
-                    console.log(luminance);
                     return luminance;
                 }
     
                 const luminance = getLuminance(predominantColor);
                 if (luminance < 128) {
-                    console.log("white");
                     document.body.style.color = 'white';
+                    document.getElementById('togglePlay').style.color = 'black';
+                    document.getElementById('togglePlay').style.backgroundcolor = 'white';
                 } else {
-                    console.log("black");
                     document.body.style.color = 'black';
+                    document.getElementById('togglePlay').style.color = 'white';
+                    document.getElementById('togglePlay').style.backgroundcolor = 'black';
+                }
+
+                if (luminance < 12) {
+                    document.querySelector('.vinyl-record').backgroundcolor = 'white';
+                } else {
+                    document.querySelector('.vinyl-record').backgroundcolor = 'black';
                 }
 
             };
