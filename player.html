@@ -38,7 +38,6 @@
     <script>
         window.onSpotifyWebPlaybackSDKReady = () => {
             const token = localStorage.getItem('spotifyAccessToken');
-            localStorage.removeItem('spotifyAccessToken');
             const player = new Spotify.Player({
                 name: 'Record Player',
                 getOAuthToken: cb => { cb(token); },
@@ -62,13 +61,7 @@
             });
 
             player.addListener('authentication_error', ({ message }) => {
-                console.log(message);
-                const clientId = 'd9a832c56d71428da01eb36c8b6e588e';
-                const redirectUri = 'https://recordplayer.vercel.app/callback.html';
-                const scopes = 'streaming';
-
-                const url = `https://accounts.spotify.com/authorize?response_type=token&client_id=${clientId}&scope=${scopes}&redirect_uri=${redirectUri}`;
-                window.location = url;
+                console.error(message);
             });
 
             player.addListener('account_error', ({ message }) => {
