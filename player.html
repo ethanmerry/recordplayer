@@ -28,7 +28,7 @@
     <div class="captionA" id="nextCaptionA">Artist</div>
   </div>
   <div class="container">
-    <div class="vinyl-record">
+    <div id="vinyl-record">
       <div class="album-art"></div>
       <div class="pin"></div>
       <div class="needle"></div>
@@ -281,9 +281,9 @@
                 }
 
                 if (luminance < 25) {
-                    document.querySelector('.vinyl-record').backgroundColor = 'white';
+                    document.getElementById('vinyl-record').backgroundColor = 'white';
                 } else {
-                    document.querySelector('.vinyl-record').backgroundColor = 'black';
+                    document.getElementById('vinyl-record').backgroundColor = 'black';
                 }
 
             };
