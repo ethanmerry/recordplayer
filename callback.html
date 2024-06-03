@@ -23,7 +23,7 @@
         if (accessToken) {
             // Store the token or use it directly to initialise the player
             localStorage.setItem('spotifyAccessToken', accessToken);
-            window.location = 'https://recordplayer.vercel.app'; // Redirect back to the main page
+            window.location = 'https://recordplayer.vercel.app/player.html'; // Redirect back to the main page
         } else {
             console.error('No access token found in URL');
         }
