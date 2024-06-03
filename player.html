@@ -263,6 +263,19 @@
                 document.body.style.backgroundColor = rgbString;
                 const pinClass = document.querySelector('.pin');
                 pinClass.style.backgroundColor = rgbString;
+                
+                function getLuminance(color) {
+                    const rgb = color.match(/\d+/g).map(Number);
+                    const luminance = 0.2126 * predominantColor[0] + 0.7152 * predominantColor[1] + 0.0722 * predominantColor[2];
+                    return luminance;
+                }
+    
+                const luminance = getLuminance(bgColor);
+                if (luminance < 128) {
+                    document.body.style.color = 'white';
+                } else {
+                    document.body.style.color = 'black';
+                }
 
             };
         }
