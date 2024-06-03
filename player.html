@@ -267,13 +267,16 @@
                 function getLuminance(color) {
                     const rgb = color.match(/\d+/g).map(Number);
                     const luminance = 0.2126 * rgb[0] + 0.7152 * rgb[1] + 0.0722 * rgb[2];
+                    console.log(luminance);
                     return luminance;
                 }
     
                 const luminance = getLuminance(predominantColor);
                 if (luminance < 128) {
+                    console.log("white");
                     document.body.style.color = 'white';
                 } else {
+                    console.log("black");
                     document.body.style.color = 'black';
                 }
 
