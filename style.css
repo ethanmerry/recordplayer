@@ -11,7 +11,7 @@ body {
   position: relative;
 }
 
-.vinyl-record {
+#vinyl-record {
   position: relative;
   width: 750px;
   height: 750px;
