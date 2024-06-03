@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spotify Callback</title>
+</head>
+<body>
+    <script>
+        function getHashParams() {
+            const hashParams = {};
+            let e, r = /([^&;=]+)=?([^&;]*)/g,
+                q = window.location.hash.substring(1);
+            while (e = r.exec(q)) {
+                hashParams[e[1]] = decodeURIComponent(e[2]);
+            }
+            return hashParams;
+        }
+
+        const params = getHashParams();
+        const accessToken = params.access_token;
+
+        if (accessToken) {
+            // Store the token or use it directly to initialise the player
+            localStorage.setItem('spotifyAccessToken', accessToken);
+            window.location = 'C:\Users\ethan\Desktop\Projects\Vinyl Spin\index.html'; // Redirect back to the main page
+        } else {
+            console.error('No access token found in URL');
+        }
+    </script>
+</body>
+</html>

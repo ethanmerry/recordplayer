@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Record Player</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="currentSong">
+    <button id="login-button" class="button">Log in with Spotify</button>
+    <div class="track">Track Name</div>
+    <div class="artist">Artist</div>
+    <button id="togglePlay" class="button">Play</button>
+  </div>
+  <div class="volume">
+    <input type="range" min="0" max="100" value="50" id="volumeSlider">
+  </div>
+  <div class="prevTrack">
+    <img class="image" id="prevImage" draggable="false">
+    <div class="captionT" id="prevCaptionT">Track</div>
+    <div class="captionA" id="prevCaptionA">Artist</div>
+  </div>
+  <div class="nextTrack">
+    <img class="image" id="nextImage" draggable="false">
+    <div class="captionT" id="nextCaptionT">Track</div>
+    <div class="captionA" id="nextCaptionA">Artist</div>
+  </div>
+  <div class="container">
+    <div class="vinyl-record">
+      <div class="album-art"></div>
+      <div class="pin"></div>
+      <div class="needle"></div>
+    </div>
+  </div>
+    <script src="https://sdk.scdn.co/spotify-player.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        document.getElementById('login-button').addEventListener('click', function() {
+          const clientId = 'd9a832c56d71428da01eb36c8b6e588e';
+          const redirectUri = 'C:\Users\ethan\Desktop\Projects\Vinyl Spin\callback.html';
+          const scopes = 'streaming user-read-email user-read-private';
+
+          const url = `https://accounts.spotify.com/authorize?response_type=token&client_id=${clientId}&scope=${scopes}&redirect_uri=${redirectUri}`;
+          window.location = url;
+        });
+
+        window.onSpotifyWebPlaybackSDKReady = () => {
+            const token = 'BQAlnmISCey0jEjFRpvm6riUpRnidho2ByvNBjiZ1qoV1-UMf_he0OxlMJdNtfyqTX-kEMhMMveHF66Aemh3ZIHYUaWnFMh4lhuWEEyjeR_VXmMmT9RwHeZxZvBDVNoKc9H6050LC78Q0lEncZGc4VVvyzzHfaAonzZ0OW5in5njFgeIhnH5OvtI0YnlWauXabb7WbCw';
+            const player = new Spotify.Player({
+                name: 'Record Player',
+                getOAuthToken: cb => { cb(token); },
+                volume: 0.5
+            });
+
+            var dragging = false;
+
+            // Ready
+            player.addListener('ready', ({ device_id }) => {
+                console.log('Ready with Device ID', device_id);
+            });
+
+            // Not Ready
+            player.addListener('not_ready', ({ device_id }) => {
+                console.log('Device ID has gone offline', device_id);
+            });
+
+            player.addListener('initialization_error', ({ message }) => {
+                console.error(message);
+            });
+
+            player.addListener('authentication_error', ({ message }) => {
+                console.error(message);
+            });
+
+            player.addListener('account_error', ({ message }) => {
+                console.error(message);
+            });
+
+            document.getElementById('togglePlay').onclick = function() {
+              player.togglePlay();
+            };
+
+            var volumeSlider = document.getElementById("volumeSlider");
+            volumeSlider.oninput = function() {
+              player.setVolume(this.value/100).then(() => {
+              });
+            }
+
+            document.querySelector('.prevTrack').addEventListener('click', function() {
+              player.previousTrack().then(() => {
+              });
+            });
+
+            document.querySelector('.nextTrack').addEventListener('click', function() {
+              player.nextTrack().then(() => {
+              });
+            });
+
+            player.connect();
+
+            player.addListener('player_state_changed', ({
+                position,
+                duration,
+                paused,
+                track_window: { current_track }
+            }) => {
+              dragElement(document.querySelector('.needle'));
+
+              function dragElement(elmnt) {
+                var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
+                if (document.getElementById(elmnt.id + "header")) {
+                  /* if present, the header is where you move the DIV from:*/
+                  document.getElementById(elmnt.id + "header").onmousedown = dragMouseDown;
+                } else {
+                  /* otherwise, move the DIV from anywhere inside the DIV:*/
+                  elmnt.onmousedown = dragMouseDown;
+                }
+
+                function dragMouseDown(e) {
+                  e = e || window.event;
+                  e.preventDefault();
+                  // get the mouse cursor position at startup:
+                  elmnt.style.cursor = "grabbing";
+                  dragging = true;
+                  pos3 = e.clientX;
+                  pos4 = e.clientY;
+                  startAngle = getAngle(e.clientX, e.clientY);
+                  currentAngle = getCurrentRotation(elmnt);
+                  document.onmouseup = closeDragElement;
+                  // call a function whenever the cursor moves:
+                  document.onmousemove = elementDrag;
+                }
+
+                function elementDrag(e) {
+                  e = e || window.event;
+                  e.preventDefault();
+                  var angle = getAngle(e.clientX, e.clientY);
+                  var deltaAngle = (angle - startAngle)*0.5; //speed
+
+                  deltaAngle = deltaAngle < -180 ? deltaAngle + 360 : deltaAngle > 180 ? deltaAngle - 360 : deltaAngle;
+                  currentAngle += deltaAngle
+
+                  if (currentAngle < 0) currentAngle = 0;
+                  if (currentAngle > 28) currentAngle = 28;
+                  elmnt.style.transform = `rotate(${currentAngle}deg) translateX(-100%)`;
+                  startAngle = angle;
+                }
+
+                function getAngle(x, y) {
+                  var rect = elmnt.getBoundingClientRect();
+                  var elmntX = rect.left + rect.width / 2;
+                  var elmntY = rect.top + rect.height / 2;
+                  var dx = x - elmntX;
+                  var dy = y - elmntY;
+                  return Math.atan2(dy, dx) * (180 / Math.PI);
+                }
+
+                function getCurrentRotation(elmnt) {
+                  var transform = elmnt.style.transform;
+                  var match = transform.match(/rotate\(([-0-9.]+)deg\)/);
+                  if (match) {
+                    return parseFloat(match[1]);
+                  }
+                  return 0;
+                }
+
+                function closeDragElement() {
+                  /* stop moving when mouse button is released:*/
+                  player.seek((currentAngle/28)*duration).then(() => {
+                  });
+                  dragging = false;
+                  elmnt.style.cursor = "grab";
+                  document.onmouseup = null;
+                  document.onmousemove = null;
+                }
+              }
+
+                document.querySelector('.track').textContent = current_track.name;
+                document.querySelector('.artist').textContent = current_track.artists.map(artist => artist.name).join(", ");
+
+                const albumArtClass = document.querySelector('.album-art');
+                if (!paused) {
+                  albumArtClass.classList.add('spin');
+                  document.getElementById('togglePlay').textContent="Pause"
+                } else {
+                  albumArtClass.classList.remove('spin');
+                  document.getElementById('togglePlay').textContent="Play"
+                }
+                albumArt = current_track.album.images.find(image => image.width === 300 && image.height === 300).url
+                if (albumArt) {
+                  albumArtClass.style.backgroundImage = `url(${albumArt})`;
+                  getPredominantColor(albumArt);
+                }
+                var needlePosition = position;
+
+                // Example to update needle position dynamically
+                const needleClass = document.querySelector('.needle');
+                setInterval(() => {
+                  player.getCurrentState().then(state => {
+                    if (!state) {
+                      console.error('User is not playing music through the Web Playback SDK');
+                    } else {
+                      if (!dragging) {
+                        var needlePosition = state.position;
+                        const rotationAngle = (needlePosition / state.duration)*28;
+                        needleClass.style.transform = `rotate(${rotationAngle}deg) translateX(-100%)`;
+                      }
+                      var next_track = state.track_window.next_tracks[0];
+                      const nextAlbumArtClass = document.getElementById('nextImage');
+                      nextAlbumArt = next_track.album.images.find(image => image.width === 300 && image.height === 300).url
+                      if (nextAlbumArt) {
+                        nextAlbumArtClass.src = nextAlbumArt
+                      }
+                      const nextCaptionT = document.getElementById('nextCaptionT');
+                      const nextCaptionA = document.getElementById('nextCaptionA');
+                      nextCaptionT.textContent=next_track.name
+                      nextCaptionA.textContent=next_track.artists.map(artist => artist.name).join(", ");
+
+                      var prev_track = state.track_window.previous_tracks[1];
+                      const prevAlbumArtClass = document.getElementById('prevImage');
+                      prevAlbumArt = prev_track.album.images.find(image => image.width === 300 && image.height === 300).url
+                      if (prevAlbumArt) {
+                        prevAlbumArtClass.src = prevAlbumArt
+                      }
+                      const prevCaptionT = document.getElementById('prevCaptionT');
+                      const prevCaptionA = document.getElementById('prevCaptionA');
+                      prevCaptionT.textContent=prev_track.name
+                      prevCaptionA.textContent=prev_track.artists.map(artist => artist.name).join(", ");
+                    }
+                  });
+                }, 1000);
+              
+            });
+        }
+
+        function getPredominantColor(imageUrl) {          
+            var img = new Image();
+            img.src = imageUrl;
+            img.crossOrigin = "Anonymous";
+
+            img.onload = function() {
+                var canvas = document.createElement("canvas");
+                canvas.width = img.width;
+                canvas.height = img.height;
+                var ctx = canvas.getContext("2d");
+                ctx.drawImage(img, 0, 0);
+
+                var imageData = ctx.getImageData(0, 0, canvas.width, canvas.height).data;
+                var colorCount = {};
+                var maxCount = 0;
+                var predominantColor = [0, 0, 0]; // Default color in case of failure to detect
+
+                for (var i = 0; i < imageData.length; i += 4) {
+                var color = [imageData[i], imageData[i + 1], imageData[i + 2]];
+                var key = color.join(",");
+                colorCount[key] = (colorCount[key] || 0) + 1;
+                if (colorCount[key] > maxCount) {
+                    maxCount = colorCount[key];
+                    predominantColor = color;
+                }
+                }
+
+                // Update the overlay color with the predominant color
+                var rgbString = "rgb(" + predominantColor.join(",") + ")";
+                document.body.style.backgroundColor = rgbString;
+                const pinClass = document.querySelector('.pin');
+                pinClass.style.backgroundColor = rgbString;
+
+            };
+        }
+    </script>
+</body>
+</html>
