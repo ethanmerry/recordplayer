@@ -36,15 +36,6 @@
     <script src="https://sdk.scdn.co/spotify-player.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
-        document.getElementById('login-button').addEventListener('click', function() {
-          const clientId = 'd9a832c56d71428da01eb36c8b6e588e';
-          const redirectUri = 'https://recordplayer.vercel.app/callback.html';
-          const scopes = 'streaming';
-
-          const url = `https://accounts.spotify.com/authorize?response_type=token&client_id=${clientId}&scope=${scopes}&redirect_uri=${redirectUri}`;
-          window.location = url;
-        });
-
         window.onSpotifyWebPlaybackSDKReady = () => {
             const clientId = 'd9a832c56d71428da01eb36c8b6e588e';
             const redirectUri = 'https://recordplayer.vercel.app/callback.html';
