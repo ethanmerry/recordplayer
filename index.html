@@ -9,7 +9,7 @@
     <script>
       const clientId = 'd9a832c56d71428da01eb36c8b6e588e';
       const redirectUri = 'https://recordplayer.vercel.app/callback.html';
-      const scopes = 'streaming';
+      const scopes = 'streaming user-read-email user-read-private';
 
       const url = `https://accounts.spotify.com/authorize?response_type=token&client_id=${clientId}&scope=${scopes}&redirect_uri=${redirectUri}`;
       window.location = url;
