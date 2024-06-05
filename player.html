@@ -83,10 +83,10 @@
             document.getElementById('toggleFS').onclick = function() {
                 if (!document.fullscreenElement) {
                   document.documentElement.requestFullscreen();
-                document.getElementById('toggleFS').textcontent = "Exit Fullscreen"
+                document.getElementById('toggleFS').textContent="Exit Fullscreen";
                 } else {
                   document.exitFullscreen();
-                  document.getElementById('toggleFS').textcontent = "Fullscreen"
+                  document.getElementById('toggleFS').textContent="Fullscreen";
                 }
             };
 
