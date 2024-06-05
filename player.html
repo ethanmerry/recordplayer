@@ -14,9 +14,13 @@
     <div class="artist">Artist</div>
     <button id="togglePlay" class="button">Play</button>
   </div>
-  <div class="volume">
-    <input type="range" min="0" max="100" value="50" id="volumeSlider">
-  </div>
+  <div class="options">
+    <button id="togglyFS" class="button">Fullscreen</button>
+    <button id=toggleVolume" class="button">Volume</button>
+    <div class="volume">
+      <input type="range" min="0" max="100" value="50" id="volumeSlider">
+    </div>
+  <div>
   <div class="prevTrack">
     <img class="image" id="prevImage" draggable="false">
     <div class="captionT" id="prevCaptionT">Track</div>
@@ -74,6 +78,16 @@
 
             document.getElementById('togglePlay').onclick = function() {
               player.togglePlay();
+            };
+
+            document.getElementById('toggleFullscreen').onclick = function() {
+                if (!document.fullscreenElement) {
+                  document.documentElement.requestFullscreen();
+                document.getElementById('toggleFullscreen').textcontent = "Exit Fullscreen"
+                } else {
+                  document.exitFullscreen();
+                  document.getElementById('toggleFullscreen').textcontent = "Fullscreen"
+                }
             };
 
             var volumeSlider = document.getElementById("volumeSlider");
