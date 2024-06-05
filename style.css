@@ -66,7 +66,7 @@ body {
   cursor: grab;
 }
 
-.volume {
+.options {
   position: absolute;
   right: 10px;
   top: 10px;
