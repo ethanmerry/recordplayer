@@ -15,11 +15,11 @@
     <button id="togglePlay" class="button">Play</button>
   </div>
   <div class="options">
-    <button id="toggleFS" class="button">Fullscreen</button>
-    <button id=toggleVolume" class="button">Volume</button>
     <div class="volume">
+      <div>Volume</div>
       <input type="range" min="0" max="100" value="50" id="volumeSlider">
     </div>
+    <button id="toggleFS" class="button">Fullscreen</button>
   </div>
   <div class="prevTrack">
     <img class="image" id="prevImage" draggable="false">
@@ -284,14 +284,19 @@
                 }
     
                 const luminance = getLuminance(predominantColor);
+                const buttons = document.querySelectorAll('.button');
                 if (luminance < 128) {
-                    document.body.style.color = 'white';
-                    document.getElementById('togglePlay').style.color = 'black';
-                    document.getElementById('togglePlay').style.backgroundColor = 'white';
+                    document.body.style.color = 'white';                
+                    buttons.forEach(button => {
+                        button.style.color = 'black';
+                        button.style.backgroundColor = 'white';
+                    });
                 } else {
                     document.body.style.color = 'black';
-                    document.getElementById('togglePlay').style.color = 'white';
-                    document.getElementById('togglePlay').style.backgroundColor = 'black';
+                    buttons.forEach(button => {
+                        button.style.color = 'white';
+                        button.style.backgroundColor = 'black';
+                    });
                 }
 
                 if (luminance < 25) {
