@@ -145,3 +145,56 @@ body {
   width: 120px;
   overflow-wrap: break-word;
 }
+
+.options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px; /* Adjust the gap between items */
+  justify-content: center;
+}
+
+.colour {
+  width: 70px;
+  height: 70px;
+  border-radius: 5px;
+}
+
+#classic {
+  background-color: rgb(0, 255, 170);
+}
+
+#red {
+  background-color: red;
+}
+
+#yellow {
+  background-color: yellow;
+}
+
+#orange {
+  background-color: orange;
+}
+
+#blue {
+  background-color: blue;
+}
+
+#navy {
+  background-color: navy;
+}
+
+#green {
+  background-color: green;
+}
+
+#pink {
+  background-color: pink;
+}
+
+#customise {
+  position: relative;
+  border: none;
+  background-color: none;
+  width: 70px;
+  height: 70px;
+}
