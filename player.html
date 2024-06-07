@@ -48,6 +48,14 @@
     <div class="colour" id="green" onclick="setColor('green');"></div>
     <div class="colour" id="pink" onclick="setColor('pink');"></div>
     <input id="customise" type="color">
+    <script>
+        function setColor(col) {
+          localStorage.setItem('color',col);
+          const colElement = document.getElementById(col);
+          document.getElementById('vinyl-record').style.backgroundColor = col;
+          colElement.style.borderRadius = "50%";
+        }
+    </script>
   </div>
     <script src="https://sdk.scdn.co/spotify-player.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -110,13 +118,6 @@
             if (currentCol) {
                 const colElement = document.getElementById(currentCol);
                 colElement.style.borderRadius = "50%";
-            }
-            
-            function setColor(col) {
-              localStorage.setItem('color',col);
-              const colElement = document.getElementById(col);
-              document.getElementById('vinyl-record').style.backgroundColor = col;
-              colElement.style.borderRadius = "50%";
             }
 
             var volumeSlider = document.getElementById("volumeSlider");
