@@ -52,6 +52,9 @@
     <script src="https://sdk.scdn.co/spotify-player.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
+        const currentCol = localStorage.getItem('color');
+        const colElement = document.getElementById(currentCol);
+        colElement.style.borderRadius = "50%";
         window.onSpotifyWebPlaybackSDKReady = () => {
             const token = localStorage.getItem('spotifyAccessToken');
             if (!token) {
@@ -105,6 +108,13 @@
                 const option = document.querySelector('.options');
                 option.style.display = "block";
             };
+
+            function setColor(col) {
+              localStorage.setItem('color',col);
+              const colElement = document.getElementById(col);
+              document.getElementById('vinyl-record').style.backgroundColor = col;
+              colElement.style.borderRadius = "50%";
+            }
 
             var volumeSlider = document.getElementById("volumeSlider");
             volumeSlider.oninput = function() {
@@ -315,10 +325,13 @@
                     });
                 }
 
-                if (luminance < 25) {
-                    document.getElementById('vinyl-record').style.backgroundColor = 'white';
-                } else {
-                    document.getElementById('vinyl-record').style.backgroundColor = 'black';
+                const currentCol = localStorage.getItem('color');
+                if (currentCol='classic') {
+                    if (luminance < 25) {
+                        document.getElementById('vinyl-record').style.backgroundColor = 'white';
+                    } else {
+                        document.getElementById('vinyl-record').style.backgroundColor = 'black';
+                    }
                 }
 
             };
