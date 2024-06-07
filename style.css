@@ -146,13 +146,6 @@ body {
   overflow-wrap: break-word;
 }
 
-.options {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px; /* Adjust the gap between items */
-  justify-content: center;
-}
-
 .colour {
   width: 70px;
   height: 70px;
@@ -197,4 +190,11 @@ body {
   background-color: none;
   width: 70px;
   height: 70px;
+}
+
+.options {
+  display: none;
+  flex-wrap: wrap;
+  gap: 10px; /* Adjust the gap between items */
+  justify-content: center;
 }
