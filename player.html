@@ -15,8 +15,9 @@
     <button id="togglePlay" class="button">Play</button>
   </div>
   <div class="options">
+    <button id="toggleFS" class="button">Fullscreen</button>
+    <button id="toggleOptions" class="button">Options</button>
     <div class="volume">
-      <button id="toggleFS" class="button">Fullscreen</button>
       <input type="range" min="0" max="100" value="50" id="volumeSlider">
     </div>
   </div>
@@ -36,6 +37,17 @@
       <div class="pin"></div>
       <div class="needle"></div>
     </div>
+  </div>
+  <div class="options" style="display: none;">
+    <div class="colour" id="classic" onclick="setColor('classic');"></div>
+    <div class="colour" id="red" onclick="setColor('red');"></div>
+    <div class="colour" id="yellow" onclick="setColor('yellow');"></div>
+    <div class="colour" id="orange" onclick="setColor('orange');"></div>
+    <div class="colour" id="blue" onclick="setColor('blue');"></div>
+    <div class="colour" id="navy" onclick="setColor('navy');"></div>
+    <div class="colour" id="green" onclick="setColor('green');"></div>
+    <div class="colour" id="pink" onclick="setColor('pink');"></div>
+    <input id="customise" type="color">
   </div>
     <script src="https://sdk.scdn.co/spotify-player.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -87,6 +99,11 @@
                   document.exitFullscreen();
                   document.getElementById('toggleFS').textContent="Fullscreen";
                 }
+            };
+
+            document.getElementById('toggleOptions').onclick = function() {
+                const option = document.querySelector('.options');
+                option.style.display = "block";
             };
 
             var volumeSlider = document.getElementById("volumeSlider");
