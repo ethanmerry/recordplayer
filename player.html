@@ -107,8 +107,10 @@
             };
 
             const currentCol = localStorage.getItem('color');
-            const colElement = document.getElementById(currentCol);
-            colElement.style.borderRadius = "50%";
+            if (currentCol) {
+                const colElement = document.getElementById(currentCol);
+                colElement.style.borderRadius = "50%";
+            }
             
             function setColor(col) {
               localStorage.setItem('color',col);
