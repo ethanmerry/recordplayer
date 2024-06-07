@@ -52,9 +52,6 @@
     <script src="https://sdk.scdn.co/spotify-player.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
-        const currentCol = localStorage.getItem('color');
-        const colElement = document.getElementById(currentCol);
-        colElement.style.borderRadius = "50%";
         window.onSpotifyWebPlaybackSDKReady = () => {
             const token = localStorage.getItem('spotifyAccessToken');
             if (!token) {
@@ -109,6 +106,10 @@
                 option.style.display = "block";
             };
 
+            const currentCol = localStorage.getItem('color');
+            const colElement = document.getElementById(currentCol);
+            colElement.style.borderRadius = "50%";
+            
             function setColor(col) {
               localStorage.setItem('color',col);
               const colElement = document.getElementById(col);
