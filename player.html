@@ -38,7 +38,7 @@
       <div class="needle"></div>
     </div>
   </div>
-  <div class="options" style="display: none;">
+  <div class="options">
     <div class="colour" id="classic" onclick="setColor('classic');"></div>
     <div class="colour" id="red" onclick="setColor('red');"></div>
     <div class="colour" id="yellow" onclick="setColor('yellow');"></div>
@@ -102,8 +102,8 @@
             };
 
             document.getElementById('toggleOptions').onclick = function() {
-                const option = document.querySelector('.options');
-                option.style.display = "block";
+                const colourOpt = document.querySelector('.options');
+                colourOpt.style.display = "flex";
             };
 
             const currentCol = localStorage.getItem('color');
