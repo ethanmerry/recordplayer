@@ -185,14 +185,6 @@ body {
   background-color: pink;
 }
 
-#customise {
-  position: relative;
-  border: none;
-  background-color: none;
-  width: 70px;
-  height: 70px;
-}
-
 .ColourOptions {
   display: none;
   flex-wrap: wrap;
