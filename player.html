@@ -131,6 +131,11 @@
                 colourOpt.style.display = "flex";
             };
 
+            const colourPicker = document.getElementById('customise');
+            colourPicker.addEventListener('input', () => {
+                document.getElementById('vinyl-record').style.backgroundColor = colourPicker;
+            });
+
             var volumeSlider = document.getElementById("volumeSlider");
             volumeSlider.oninput = function() {
               player.setVolume(this.value/100).then(() => {
