@@ -196,11 +196,13 @@ body {
 .menu-title {
     font-size: 24px;
     margin-bottom: 10px;
+    colour: black;
 }
 
 .menu-description {
     font-size: 16px;
     margin-bottom: 20px;
+    colour: black;
 }
 
 .menu-items {
