@@ -38,15 +38,18 @@
       <div class="needle"></div>
     </div>
   </div>
-  <div class="ColourOptions">
-    <div class="colour" id="classic"></div>
-    <div class="colour" id="red" onclick="setColor('red');"></div>
-    <div class="colour" id="yellow" onclick="setColor('yellow');"></div>
-    <div class="colour" id="orange" onclick="setColor('orange');"></div>
-    <div class="colour" id="blue" onclick="setColor('blue');"></div>
-    <div class="colour" id="navy" onclick="setColor('navy');"></div>
-    <div class="colour" id="green" onclick="setColor('green');"></div>
-    <div class="colour" id="pink" onclick="setColor('pink');"></div>
+  <div class="menu">
+        <h1 class="menu-title">Record Colour Change</h1>
+        <p class="menu-description">Customise your record with these colours!</p>
+        <div class="menu-items">
+            <div class="menu-item" id="classic"></div>
+    		<div class="menu-item" id="red" onclick="setColor('red');"></div>
+    		<div class="menu-item" id="yellow" onclick="setColor('yellow');"></div>
+    		<div class="menu-item" id="orange" onclick="setColor('orange');"></div>
+    		<div class="menu-item" id="blue" onclick="setColor('blue');"></div>
+    		<div class="menu-item" id="navy" onclick="setColor('navy');"></div>
+    		<div class="menu-item" id="green" onclick="setColor('green');"></div>
+    		<div class="menu-item" id="pink" onclick="setColor('pink');"></div>
     <script>
         var previouslySelected
         const currentCol = localStorage.getItem('color');
@@ -72,7 +75,8 @@
           }
         }
     </script>
-  </div>
+        </div>
+    </div>
     <script src="https://sdk.scdn.co/spotify-player.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
