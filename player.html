@@ -55,7 +55,7 @@
             previouslySelected = currentCol;
         }
         function setColor(col) {
-          if col != previouslySelected {
+          if (col != previouslySelected) {
               localStorage.setItem('color',col);
               const colElement = document.getElementById(col);
               document.getElementById('vinyl-record').style.backgroundColor = col;
