@@ -128,8 +128,14 @@
             };
 
             document.getElementById('toggleOptions').onclick = function() {
-                const colourOpt = document.querySelector('.ColourOptions');
-                colourOpt.style.display = "flex";
+                const menu = document.querySelector('.menu');
+                if (menu.style.display == "none) {
+                    document.getElementById('toggleOptions').textContent="Exit Options";
+                    menu.style.display = "block";
+                } else {
+                    document.getElementById('toggleOptions').textContent="Options";
+                    menu.style.display = "none";
+                }
             };
 
             var volumeSlider = document.getElementById("volumeSlider");
