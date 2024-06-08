@@ -55,15 +55,17 @@
             previouslySelected = currentCol;
         }
         function setColor(col) {
-          localStorage.setItem('color',col);
-          const colElement = document.getElementById(col);
-          document.getElementById('vinyl-record').style.backgroundColor = col;
-          colElement.style.borderRadius = "50%";
-          if (previouslySelected) {
-              const prevElement = document.getElementById(previouslySelected);
-              prevElement.style.borderRadius = "5px";
+          if col != previouslySelected {
+              localStorage.setItem('color',col);
+              const colElement = document.getElementById(col);
+              document.getElementById('vinyl-record').style.backgroundColor = col;
+              colElement.style.borderRadius = "50%";
+              if (previouslySelected) {
+                  const prevElement = document.getElementById(previouslySelected);
+                  prevElement.style.borderRadius = "5px";
+              }
+              previouslySelected = col;
           }
-          previouslySelected = col;
         }
     </script>
   </div>
