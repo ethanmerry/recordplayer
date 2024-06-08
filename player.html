@@ -39,7 +39,7 @@
     </div>
   </div>
   <div class="ColourOptions">
-    <div class="colour" id="classic" onclick="setColor('classic');"></div>
+    <div class="colour" id="classic"></div>
     <div class="colour" id="red" onclick="setColor('red');"></div>
     <div class="colour" id="yellow" onclick="setColor('yellow');"></div>
     <div class="colour" id="orange" onclick="setColor('orange');"></div>
@@ -49,11 +49,17 @@
     <div class="colour" id="pink" onclick="setColor('pink');"></div>
     <input id="customise" type="color">
     <script>
+        var previouslySelected
         function setColor(col) {
           localStorage.setItem('color',col);
           const colElement = document.getElementById(col);
           document.getElementById('vinyl-record').style.backgroundColor = col;
           colElement.style.borderRadius = "50%";
+          if (previouslySelected) {
+              const prevElement = document.getElementById(previouslySelected);
+              prevElement.style.borderRadius = "5px";
+          }
+          previouslySelected = col;
         }
     </script>
   </div>
@@ -117,6 +123,7 @@
             const currentCol = localStorage.getItem('color');
             if (currentCol) {
                 const colElement = document.getElementById(currentCol);
+                document.getElementById('vinyl-record').style.backgroundColor = currentCol;
                 colElement.style.borderRadius = "50%";
             }
 
@@ -329,6 +336,14 @@
                     });
                 }
 
+                document.getElementById('classic').onclick = function() {
+                    if (luminance < 25) {
+                        document.getElementById('vinyl-record').style.backgroundColor = 'white';
+                    } else {
+                        document.getElementById('vinyl-record').style.backgroundColor = 'black';
+                    }
+                };
+                
                 const currentCol = localStorage.getItem('color');
                 if (currentCol=='classic') {
                     if (luminance < 25) {
