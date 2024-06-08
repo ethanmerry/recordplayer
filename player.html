@@ -50,6 +50,10 @@
     <input id="customise" type="color">
     <script>
         var previouslySelected
+        const currentCol = localStorage.getItem('color');
+        if (currentCol) {
+            previouslySelected = currentCol;
+        }
         function setColor(col) {
           localStorage.setItem('color',col);
           const colElement = document.getElementById(col);
