@@ -53,12 +53,17 @@
         const currentCol = localStorage.getItem('color');
         if (currentCol) {
             previouslySelected = currentCol;
+            const colElement = document.getElementById(currentCol);
+            document.getElementById('vinyl-record').style.backgroundColor = currentCol;
+            colElement.style.borderRadius = "50%";
         }
-        function setColor(col) {
+        window.setColor = function(col) {
           if (col != previouslySelected) {
               localStorage.setItem('color',col);
               const colElement = document.getElementById(col);
-              document.getElementById('vinyl-record').style.backgroundColor = col;
+              if (col != "classic") {
+                  document.getElementById('vinyl-record').style.backgroundColor = col;
+              }
               colElement.style.borderRadius = "50%";
               if (previouslySelected) {
                   const prevElement = document.getElementById(previouslySelected);
@@ -125,13 +130,6 @@
                 const colourOpt = document.querySelector('.ColourOptions');
                 colourOpt.style.display = "flex";
             };
-
-            const currentCol = localStorage.getItem('color');
-            if (currentCol) {
-                const colElement = document.getElementById(currentCol);
-                document.getElementById('vinyl-record').style.backgroundColor = currentCol;
-                colElement.style.borderRadius = "50%";
-            }
 
             var volumeSlider = document.getElementById("volumeSlider");
             volumeSlider.oninput = function() {
@@ -343,6 +341,7 @@
                 }
 
                 document.getElementById('classic').onclick = function() {
+                    window.setColor('classic');
                     if (luminance < 25) {
                         document.getElementById('vinyl-record').style.backgroundColor = 'white';
                     } else {
