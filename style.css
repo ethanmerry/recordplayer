@@ -153,7 +153,7 @@ body {
 }
 
 #classic {
-  background-color: rgb(0, 255, 170);
+  background: linear-gradient(135deg, black 50%, white 50%);
 }
 
 #red {
