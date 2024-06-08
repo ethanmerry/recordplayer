@@ -47,7 +47,6 @@
     <div class="colour" id="navy" onclick="setColor('navy');"></div>
     <div class="colour" id="green" onclick="setColor('green');"></div>
     <div class="colour" id="pink" onclick="setColor('pink');"></div>
-    <input id="customise" type="color">
     <script>
         var previouslySelected
         const currentCol = localStorage.getItem('color');
@@ -130,11 +129,6 @@
                 const colourOpt = document.querySelector('.ColourOptions');
                 colourOpt.style.display = "flex";
             };
-
-            const colourPicker = document.getElementById('customise');
-            colourPicker.addEventListener('input', () => {
-                document.getElementById('vinyl-record').style.backgroundColor = colourPicker;
-            });
 
             var volumeSlider = document.getElementById("volumeSlider");
             volumeSlider.oninput = function() {
