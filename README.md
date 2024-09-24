@@ -7,6 +7,8 @@
 
 **Technologies:** Spotify Web Playback API
 
+[**Visit Project**](https://recordplayer.vercel.app/)
+
 ## Images of Project
 ![image](https://github.com/user-attachments/assets/f5a74952-e591-49c9-b413-25d3b5968bf6)
 
